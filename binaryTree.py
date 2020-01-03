@@ -41,6 +41,7 @@ class binaryTree:
             else:
                 self.insert(node.right, value)
 
+
     def print_inorder(self):
         stack = []
         current_node = self.head.left
@@ -62,7 +63,34 @@ class binaryTree:
         while len(stack) != 0:
             print(stack.pop())
 
+    def print_inorder(self, *args):
+        # print tree recursively
+        if len(args) == 0:
+            print('empty')
+            return
+        node = args[0]
+        if node != None:
+            self.print_inorder(node.left)
+            print(node.root)
+            self.print_inorder(node.right)
+        else:
+            return
 
+    def search(self, search_item):
+        notFound = True
+        current_node = self.head
+        while current_node != None:
+            if current_node.root == search_item:
+                print('found %s'%(search_item))
+                return
+            else:
+                if current_node.root > search_item:
+                    current_node = current_node.left
+                elif current_node.root < search_item:
+                    current_node = current_node.right
+
+        if notFound:
+            print('%s not in tree'%(search_item))
 if __name__ == '__main__':
     bt = binaryTree(4)
     bt.insert(bt.head, 3)
@@ -70,4 +98,10 @@ if __name__ == '__main__':
     bt.insert(bt.head, 1)
     bt.insert(bt.head, 8)
     bt.insert(bt.head, 7)
+    bt.insert(bt.head, 9)
+    bt.insert(bt.head, 1)
+    bt.insert(bt.head, 7)
+    bt.insert(bt.head, 6)
     bt.print_inorder()
+    bt.print_inorder(bt.head)
+    bt.search(9)
